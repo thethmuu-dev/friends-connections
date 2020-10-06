@@ -15,7 +15,7 @@ module FriendsConnection
       g.javascript_engine :js
       g.helper            false
       g.system_tests      false
-      g.test_framework    false
+      g.test_framework    nil
       g.jbuilder          false
     end
 
