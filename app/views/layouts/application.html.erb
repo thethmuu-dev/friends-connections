@@ -11,12 +11,33 @@
   </head>
 
   <body>
-    <ul class="nav">
-      <li class="nav-item">
-        <a><%= link_to 'Users', users_path if logged_in? %></a>
-      </li>
-    </ul>
+    <div class="container">
 
-    <%= yield %>
+      <ul class="nav justify-content-end">
+        <% if user_signed_in? %>
+          <a class="nav-link text-dark"><%= current_user.email %></a>
+          <%= link_to "Users List", users_path, class: "nav-link" %>
+          <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        <% else %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+          <%= link_to "Log In", new_user_session_path, class: "nav-link" %>
+        <% end %>
+      </ul>
+
+      <div class="col-md-6 mx-auto">
+        <% if notice %>
+        <div class="alert alert-warning text-centere" role="alert">
+          <%= notice %>
+        </div>
+        <% end %>
+        <% if alert %>
+        <div class="alert alert-warning text-center" role="alert">
+          <%= alert %>
+        </div>
+        <% end %>
+      </div>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
